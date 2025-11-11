@@ -1,4 +1,4 @@
-# Production-Grade Profiling Report: Proj2.hs (Musician Game)
+## Profiling Report: Proj2.hs (Musician Game)
 ## Compiled with GHC -O2 Optimization
 
 **Date:** October 17, 2025  
@@ -10,14 +10,14 @@
 
 ## Executive Summary
 
-The Musician game implementation has been comprehensively profiled across all 1,330 possible target chords. The program demonstrates **excellent performance** with an average of **4.27 guesses** per game and runs in approximately **4.2 minutes** for the complete test suite.
+The Musician solver was profiled exhaustively across all 1,330 possible target chords. The implementation achieves strong performance, averaging 4.27 guesses per game with a total runtime of approximately 4.2 minutes for the full benchmark suite.
 
 ### Key Metrics
 - **Total execution time:** 252 seconds (4.2 minutes) for 1,330 games
 - **Average time per game:** 189 ms
-- **Total memory allocated:** 1,095 GB (across entire run)
-- **Maximum residency:** 683 KB (very low memory footprint)
-- **GC overhead:** 0.0% (excellent memory management)
+- **Total memory allocated:** 1,095 GB (entire run)
+- **Maximum residency:** 683 KB 
+- **GC overhead:** 0.0% 
 - **Productivity:** 99.7% (time spent in actual computation vs GC)
 
 ---
@@ -45,8 +45,6 @@ Total guesses:       5,681
 | 5       | 438     | 32.9%      |
 | 6       | 67      | 5.0%       |
 | 7       | 5       | 0.4%       |
-
-**Analysis:** The algorithm performs optimally, with 46.5% of targets solved in 4 guesses. The distribution is well-centered with minimal worst-case scenarios (only 5 targets require 7 guesses).
 
 ### 1.3 Worst-Case Targets
 
@@ -81,8 +79,6 @@ The following targets require the most guesses (7):
 - It's the core computational kernel
 - The algorithm requires feedback for every guess-target pair evaluation
 
-**Efficient implementation:** The use of strict evaluation (`BangPatterns`) and manual tail-recursive counting functions shows in the low allocation overhead relative to time spent.
-
 ---
 
 ## 3. Memory Profiling
@@ -105,13 +101,6 @@ Average pause time:  0.00003s (30 microseconds)
 Maximum pause time:  0.0003s (0.3 milliseconds)
 GC time percentage:  0.0%
 ```
-
-**Analysis:** Extremely efficient memory usage. The low residency (683 KB max) indicates:
-- No memory leaks
-- Excellent strictness annotations
-- Efficient data structure choices
-- Minimal garbage generation per allocation
-
 ---
 
 ## 4. Function Call Analysis
@@ -136,8 +125,6 @@ The two-ply lookahead is triggered when candidate count ≤ 50:
 - **Performance impact:** <5% overhead
 - **Quality improvement:** Reduces average guesses by ~0.15
 
-**Verdict:** The two-ply threshold (50 candidates) is well-tuned.
-
 ---
 
 ## 5. Optimization Analysis
@@ -150,9 +137,7 @@ The two-ply lookahead is triggered when candidate count ≤ 50:
 ✅ **foldl':** Strict left fold prevents space leaks in histogram building  
 ✅ **List comprehensions:** GHC optimizes these well with -O2  
 
-### 5.2 Potential Future Optimizations
-
-While the current performance is excellent, possible improvements include:
+### 5.2 Future Optimizations
 
 1. **Memoization:** Cache feedback results for frequently computed pairs
    - Expected gain: 10-20% speedup
@@ -172,11 +157,6 @@ While the current performance is excellent, possible improvements include:
 4. **Better two-ply heuristics:** Adaptive threshold based on remaining candidates
    - Expected gain: 0.05-0.1 average guesses reduction
    - Complexity: Low
-
-**Recommendation:** Current implementation is production-ready as-is. Only optimize further if:
-- Running on much larger search spaces
-- Need real-time response for interactive systems
-- Running on resource-constrained hardware
 
 ---
 
@@ -219,45 +199,9 @@ Time:      252 seconds
 
 ---
 
-## 8. Production Readiness Assessment
+## 8. Appendix
 
-### 8.1 Criteria Checklist
-
-| Criterion                    | Status | Notes                                      |
-|------------------------------|--------|--------------------------------------------|
-| Correctness                  | ✅     | All test cases pass                        |
-| Performance                  | ✅     | 4.27 average guesses, <200ms per game     |
-| Memory efficiency            | ✅     | 683 KB max residency                       |
-| No memory leaks              | ✅     | Flat residency, 0% GC overhead            |
-| Worst-case bounded           | ✅     | Maximum 7 guesses                         |
-| Code quality                 | ✅     | Well-documented, clear structure          |
-| Optimization level           | ✅     | -O2 with appropriate strictness           |
-| Profiling instrumentation    | ✅     | Comprehensive profiling data available    |
-
----
-
-## 9. Recommendations
-
-### 9.1 For Current Use
-- ✅ Deploy as-is for production use
-- ✅ No immediate optimizations required
-- ✅ Monitor performance in production for any edge cases
-
-### 9.2 For Future Development
-- Consider parallelization if processing many games simultaneously
-- Explore memoization if running interactive/real-time systems
-- Profile with different initial guesses to verify robustness
-
-### 9.3 Monitoring in Production
-- Track average guesses per game
-- Monitor 95th/99th percentile worst-case scenarios
-- Alert if average exceeds 4.5 guesses
-
----
-
-## 10. Appendix
-
-### 10.1 Compilation Commands
+### 8.1 Compilation Commands
 
 ```bash
 # Compile with profiling
@@ -271,14 +215,14 @@ ghc -O2 -prof -fprof-auto -rtsopts Benchmark.hs
 hp2ps -c Benchmark.hp
 ```
 
-### 10.2 Test Environment
+### 8.2 Test Environment
 
 - **OS:** macOS 24.6.0
 - **Architecture:** (Check with `uname -m`)
 - **Compiler:** GHC with -O2 optimization
 - **Test date:** October 17, 2025
 
-### 10.3 Files Generated
+### 8.3 Files Generated
 
 - `Benchmark.prof` - Time and allocation profiling
 - `Benchmark.hp` - Heap profile data
