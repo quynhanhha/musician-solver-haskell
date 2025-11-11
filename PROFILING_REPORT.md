@@ -131,11 +131,11 @@ The two-ply lookahead is triggered when candidate count ≤ 50:
 
 ### 5.1 Effective Optimizations
 
-✅ **BangPatterns:** Prevents thunk buildup, evidenced by low memory residency  
-✅ **Strict data structures:** `Map.Strict` prevents lazy map entries  
-✅ **Manual tail recursion:** `noteCounts.go` and `octCounts.go` are efficiently optimized  
-✅ **foldl':** Strict left fold prevents space leaks in histogram building  
-✅ **List comprehensions:** GHC optimizes these well with -O2  
+- **BangPatterns:** Prevents thunk buildup, evidenced by low memory residency  
+- **Strict data structures:** `Map.Strict` prevents lazy map entries  
+- **Manual tail recursion:** `noteCounts.go` and `octCounts.go` are efficiently optimized  
+- **foldl':** Strict left fold prevents space leaks in histogram building  
+- **List comprehensions:** GHC optimizes these well with -O2  
 
 ### 5.2 Future Optimizations
 
