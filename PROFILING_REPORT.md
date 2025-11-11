@@ -1,4 +1,4 @@
-## Profiling Report: Proj2.hs (Musician Game)
+## Profiling Report: Musician Game
 ## Compiled with GHC -O2 Optimization
 
 **Date:** October 17, 2025  
